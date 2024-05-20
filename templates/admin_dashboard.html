@@ -1,10 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+{% extends 'app.html' %}
+    <title>Admin Dashboard</title>
+{% block content %}
 <body>
+    <h1>Admin Dashboard</h1>
+    <p><a href="{{ url_for('add_user_form') }}" class="btn btn-primary">Add User</a></p>
 
-</body>
-</html>
+    <h2>Users</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+                <th scope="col">Password</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user[0] }}</td>  <td>{{ user[1] }}</td>  <td>{{ user[2] }}</td> <td>{{ user[3] }}</td> <td>{{ user[4] }}</td>  <td>
+                    <a href="{{ url_for('edit_user_form', user_id=user[0]) }}" class="btn btn-sm btn-secondary">Edit</a>
+                </td>
+                <td>
+                    <form action="{{ url_for('delete_user_confirmation', user_id=user[0]) }}" method="POST">
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete this user?')" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="flash {{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+{% endblock %}
