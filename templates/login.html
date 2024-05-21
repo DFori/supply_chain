@@ -2,8 +2,8 @@
 {% extends 'app.html' %}
 {% block content %}
 
-<div class="container">
-  <h2>Login form</h2>
+<div class="container box login-box">
+  <h1>Login form</h1>
 
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -21,8 +21,7 @@
   <form action="/login" method="POST">
     {{ form.hidden_tag() }}
     <div class="form-group">
-        {{ form.email.label(for="email")}}
-        {{ form.email(id="email", class="form-control")}}
+        {{ form.email(id="email", class="form-control", placeholder="Email")}}
   
         {% if form.email.errors %}
               <ul>
@@ -34,8 +33,7 @@
     </div>
 
     <div class="form-group">
-        {{ form.password.label(for="password")}}
-        {{ form.password(id="password", class="form-control")}}
+        {{ form.password(id="password", class="form-control", placeholder="Password")}}
 
         {% if form.password.errors %}
                 <ul>
@@ -47,8 +45,7 @@
     </div>
 
     <div class="form-group">
-        {{ form.role.label(for="role")}}
-        {{ form.role(id="role", class="form-control")}}
+        {{ form.role(id="role", class="form-control", placeholder="Role")}}
 
         {% if form.role.errors %}
                 <ul>
@@ -58,8 +55,8 @@
                 </ul>
         {% endif %}
     </div>
-    {{ form.submit(class="btn btn-dark mt-4")}}
-    <a href="/register" class="btn btn-secondary mt-4">Register page</a>
+    {{ form.submit(class="btn btn-dark mt-4 btn-block")}}
+    <a href="/register" class="btn btn-secondary mt-4 btn-block">Register page</a>
   </form>
 </div>
 

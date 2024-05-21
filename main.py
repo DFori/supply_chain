@@ -90,21 +90,12 @@ def register():
 
         print(mycursor.rowcount, "record inserted.")
         print("1 record inserted, ID:", mycursor.lastrowid)
-
-
-        # store data into database
-        # # mycursor = mydb.cursor()
-        # mycursor.execute("INSERT INTO users (name,email,password,role) VALUES (%s,%s,%s,%s)",
-        #                (name, email, hashed_password, role))
-        # mysql.connection.commit()
-        # mydb.commit()
         mycursor.close()
 
         return redirect(url_for('dashboard'))
 
     return render_template('register.html', form=form)
 
-########################################## GEMINI #################################################################
 
 
 # Get all users
@@ -186,7 +177,7 @@ def delete_user_confirmation(user_id):
         return redirect(url_for("admin_dashboard"))
     return render_template
 
-####################### END GEMINI ###############################################
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -205,7 +196,6 @@ def login():
 
         mycursor.execute("SELECT * FROM users WHERE email=%s", (email,))
         user = mycursor.fetchone()
-        # mycursor.close()
         if user and bcrypt.checkpw(password=password.encode('utf-8'), hashed_password=user[4].encode('utf-8')):
             session['user_id'] = user[0]
             if role == "admin":

@@ -1,9 +1,8 @@
 {% extends 'app.html' %}
     <title>Admin Dashboard</title>
 {% block content %}
-<body>
     <h1>Admin Dashboard</h1>
-    <p><a href="{{ url_for('add_user_form') }}" class="btn btn-primary">Add User</a></p>
+    <p class="add-user"><a href="{{ url_for('add_user_form') }}" class="btn btn-primary">Add User</a></p>
 
     <h2>Users</h2>
     <table class="table table-striped">
